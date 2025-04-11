@@ -42,9 +42,41 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 > Desenvolvido por
 
-> <img src="![Gabriel](https://github.com/user-attachments/assets/43f395b7-8162-4acb-8ce2-d362cf114a4f)
-" width="40" height="40" style="border-radius:50%"> Gabriel Batista Pontes &nbsp;&nbsp;&nbsp;  
-> <img src="![Nercino](https://github.com/user-attachments/assets/3fe7baa4-5d62-4698-90b2-95ef43b0601c)
-" width="40" height="40" style="border-radius:50%"> Nercino José de Barros Neto
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/gabrielbpontes">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/127130171?s=48&v=4" width="100px;" alt=""/>
+        <br />
+        <sub><b>Gabriel Pontes</b></sub>
+      </a>
+      <br/>
+      <a href="https://github.com/gabrielbpontes" target="_blank">
+        <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" style="padding-top: 10px;">
+      </a>
+      <br/>
+      <a href="https://www.linkedin.com/in/gabriel-pontes-2152a9276/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" style="padding-top: 10px;">
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/NercinoN21">
+        <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/86074258?v=4" width="100px;" alt=""/>
+        <br />
+        <sub><b>Nercino Neto</b></sub>
+      </a>
+      <br />
+      <a href="https://github.com/NercinoN21" target="_blank">
+        <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" style="padding-top: 10px;">
+      </a>
+      <br/>
+      <a href="https://www.linkedin.com/in/nercino-neto/" target="_blank">
+        <img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" style="padding-top: 10px;">
+      </a>
+    </td>
+      
+    </td>
+  </tr>
+</table>
 
 > Contribuições e sugestões são muito bem-vindas!
