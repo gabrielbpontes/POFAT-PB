@@ -56,7 +56,7 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
       </a>
       <br/>
       <a href="https://www.linkedin.com/in/gabriel-pontes-2152a9276/" target="_blank">
-        <img src="![Imagem do WhatsApp de 2025-04-11 à(s) 00 22 56_69718ae6](https://github.com/user-attachments/assets/257cedbe-0581-469e-b509-bdb376c25b9c)" alt="LinkedIn" style="padding-top: 10px;">
+        <img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" style="padding-top: 10px;">
       </a>
     </td>
     <td align="center">
