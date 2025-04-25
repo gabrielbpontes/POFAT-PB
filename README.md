@@ -2,10 +2,41 @@
 
 Este projeto tem como objetivo aplicar técnicas de aprendizado de máquina para prever a ocorrência de feridos em acidentes de trânsito no estado da Paraíba, utilizando dados históricos e variáveis como dia da semana, horário do acidente, condições meteorológicas e número de veículos e pessoas envolvidos.
 
-## 📂 Estrutura do Projeto
+## 🚀 Como Executar o Dashboard
 
-- `acidentespb.csv`: Base de dados contendo registros de acidentes na Paraíba.
-- `modelo_preditivo.ipynb`: Notebook principal com o passo a passo do pré-processamento, modelagem e avaliação.
+### Pré-requisitos
+
+- Python 3.8 ou superior
+- pip (gerenciador de pacotes Python)
+- Git
+
+### 1. Clonar o Repositório
+
+```bash
+# Clone o repositório
+git clone https://github.com/gabrielbpontes/POFAT-PB.git
+cd POFAT-PB
+```
+
+### 2. Configuração do Ambiente
+
+```bash
+# Crie um ambiente virtual (recomendado)
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# ou
+.\venv\Scripts\activate  # Windows
+
+# Instale as dependências
+pip install -r requirements.txt
+```
+
+### 3. Executando a Aplicação
+
+Execute a aplicação Streamlit:
+```bash
+streamlit run APP/main.py
+```
 
 ## 🧠 Modelos Avaliados
 
@@ -33,6 +64,9 @@ A Regressão Logística apresentou o melhor desempenho, com acurácia média sup
 - Scikit-learn
 - Pickle
 - Jupyter Notebook
+- Streamlit
+- Plotly
+- NumPy
 
 ## 📃 Licença
 
@@ -74,8 +108,6 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
         <img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" style="padding-top: 10px;">
       </a>
     </td>
-      
-
   </tr>
 </table>
 
