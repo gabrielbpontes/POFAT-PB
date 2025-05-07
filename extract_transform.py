@@ -11,8 +11,11 @@ URL_LINKS = 'https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dado
 URL_DOWNLOAD = (
     'https://drive.usercontent.google.com/u/0/uc?id={}&export=download'
 )
+URL_DATASET = (
+    'data/acidentes_pb.csv'
+)
 ANO_INICIO = 2020
-ANO_FIM = 2024
+ANO_FIM = 2025
 
 
 def get_url_links() -> pd.DataFrame:
@@ -79,6 +82,11 @@ def concat_and_filter_dataset() -> pd.DataFrame:
 
     return dataset
 
+def remove_files():
+    files = set(glob('data/*'))
+    files = files - {URL_DATASET}
+    for file in files:
+        os.remove(file)
 
 def main():
     os.makedirs('data', exist_ok=True)
@@ -87,7 +95,8 @@ def main():
     download_data(df)
     unzip_files()
     dataset = concat_and_filter_dataset()
-    dataset.to_csv('data/acidentes_pb.csv', index=False)
+    dataset.to_csv(URL_DATASET, index=False)
+    remove_files()
 
 
 if __name__ == '__main__':
