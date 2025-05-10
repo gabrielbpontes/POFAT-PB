@@ -2,12 +2,133 @@ import pickle
 
 import pandas as pd
 import streamlit as st
+from utils import footer
 
+STYLES = {
+    'main': """
+        <style>
+        /* Estilos gerais */
+        .stApp {
+            background: linear-gradient(180deg, #0E1117 0%, #1A1D24 100%);
+            color: #FFFFFF;
+        }
+
+        /* Container principal */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+        }
+
+        /* Título */
+        .title-container {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-top: 0.5rem;
+        }
+        .title-container::after {
+            content: '';
+            position: absolute;
+            bottom: -0.75rem;
+            left: 30%;
+            width: 40%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #FF5000, transparent);
+        }
+        .title {
+            color: #FF5000;
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Seções */
+        .section {
+            background: rgba(30, 30, 30, 0.3);
+            border: 1px solid rgba(255, 80, 0, 0.1);
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .section:hover {
+            border-color: #FF5000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 80, 0, 0.1);
+        }
+        .section-title {
+            color: #FF5000;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Filtros */
+        .filter-container {
+            background: rgba(30, 30, 30, 0.3);
+            border: 1px solid rgba(255, 80, 0, 0.1);
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Métricas */
+        .metric-container {
+            background: rgba(30, 30, 30, 0.3);
+            border: 1px solid rgba(255, 80, 0, 0.1);
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(5px);
+        }
+        .metric-title {
+            color: #FF5000;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 80, 0, 0.1);
+            color: #808495;
+            font-size: 0.8rem;
+            letter-spacing: 0.4px;
+            text-align: center;
+        }
+
+        /* Ajustes para elementos do Streamlit */
+        .stMarkdown {
+            background: transparent !important;
+        }
+        .stMarkdown p {
+            color: #808495 !important;
+        }
+        .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4 {
+            color: #FF5000 !important;
+        }
+        .stMetric {
+            background: rgba(30, 30, 30, 0.3) !important;
+            border: 1px solid rgba(255, 80, 0, 0.1) !important;
+            border-radius: 6px !important;
+            padding: 1rem !important;
+        }
+        </style>
+    """
+}
 
 @st.cache_resource
-def carregar_modelo():
+def carregar_modelo(nome_modelo):
     try:
-        with open('modelo_final.pkl', 'rb') as f:
+        with open(f'modelos/{nome_modelo}', 'rb') as f:
             modelo = pickle.load(f)
         return modelo
     except Exception as e:
@@ -68,85 +189,16 @@ def criar_dados_entrada(
 
 
 def exibir():
+    st.markdown(STYLES['main'], unsafe_allow_html=True)
+    st.markdown('<div class="main-container">', unsafe_allow_html=True)
+
     st.markdown(
         """
-        <style>
-        /* Estilos gerais */
-        .stApp {
-            background: linear-gradient(180deg, #0E1117 0%, #1A1D24 100%);
-            color: #FFFFFF;
-        }
-        
-        /* Container principal */
-        .main-container {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 1rem 1.5rem;
-        }
-        
-        /* Título */
-        .title-container {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-top: 0.5rem;
-        }
-        .title-container::after {
-            content: '';
-            position: absolute;
-            bottom: -0.75rem;
-            left: 30%;
-            width: 40%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #FF5000, transparent);
-        }
-        .title {
-            color: #FF5000;
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Botão de previsão específico */
-        button[data-testid="baseButton-secondary"][data-baseweb="button"] {
-            background: linear-gradient(90deg, #FF5000, #FF6B00) !important;
-            border: none !important;
-            color: white !important;
-            font-weight: 600 !important;
-            padding: 0.75rem 1.5rem !important;
-            border-radius: 6px !important;
-            transition: all 0.3s ease !important;
-            width: 100% !important;
-            margin-top: 0.5rem !important;
-        }
-        button[data-testid="baseButton-secondary"][data-baseweb="button"]:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 80, 0, 0.2);
-        }
-        
-        /* Mensagens de status */
-        .stAlert {
-            background: rgba(30, 30, 30, 0.3) !important;
-            border: 1px solid rgba(255, 80, 0, 0.1) !important;
-            border-radius: 6px !important;
-        }
-        
-        /* Estilo do modal */
-        .stPopover {
-            background: rgba(30, 30, 30, 0.95) !important;
-            border: 1px solid rgba(255, 80, 0, 0.2) !important;
-            border-radius: 8px !important;
-            padding: 1.5rem !important;
-            backdrop-filter: blur(5px) !important;
-        }
-        </style>
-        
-        <div class="main-container">
-            <div class="title-container">
-                <h1 class="title">Previsor de Vítimas em Acidentes</h1>
-                <p class="subtitle">Preveja a ocorrência de vítimas em acidentes com base em diferentes fatores</p>
-            </div>
+        <div class="title-container">
+            <div class="title">Simulador de Risco de Acidente</div>
+            <p style='color: #808495; font-size: 1.1rem; letter-spacing: 0.5px;'>
+                Simule o risco de acidente com vítimas com base em diferentes fatores
+            </p>
         </div>
     """,
         unsafe_allow_html=True,
@@ -157,6 +209,12 @@ def exibir():
 
         with col1:
             st.subheader('Informações do Acidente')
+
+            modelo_selecionado = st.selectbox(
+                'Modelo',
+                ['Forest', 'KNN', 'Logit'],
+                key='modelo_select',
+            )
 
             br = st.selectbox(
                 'BR',
@@ -213,8 +271,6 @@ def exibir():
 
         with col2:
             st.subheader('Quantidades')
-
-            # (max_value=50, pois o modelo foi treinado com até 50 pessoas)
             pessoas = st.slider(
                 'Número de Pessoas',
                 min_value=1,
@@ -223,7 +279,6 @@ def exibir():
                 key='pessoas_slider',
             )
 
-            # (max_value=22, pois o modelo foi treinado com até 22 veículos)
             veiculos = st.slider(
                 'Número de Veículos',
                 min_value=1,
@@ -232,51 +287,68 @@ def exibir():
                 key='veiculos_slider',
             )
 
-    dados_entrada = criar_dados_entrada(
-        dia_semana, br, fase_dia, condicao_metereologica, pessoas, veiculos
-    )
-
-    try:
-        modelo = carregar_modelo()
-        if modelo is None:
-            raise Exception(
-                'Erro ao carregar o modelo, verifique se o arquivo modelo_final.pkl está presente no diretório raiz.'
+            dados_entrada = criar_dados_entrada(
+                dia_semana,
+                br,
+                fase_dia,
+                condicao_metereologica,
+                pessoas,
+                veiculos,
             )
 
-        probabilidades = modelo['resultados'].predict_proba(dados_entrada)
+            try:
+                modelo = carregar_modelo(f'modelo_{modelo_selecionado}.pkl')
+                if modelo is None:
+                    raise Exception(
+                        'Erro ao carregar o modelo, verifique se o arquivo do modelo está presente no diretório modelos.'
+                    )
 
-        # Exibir resultados em um popover
-        with st.popover('Resultado da Previsão', use_container_width=True):
-            st.subheader('Probabilidades')
+                probabilidades = modelo.predict_proba(dados_entrada)
 
-            col1, col2 = st.columns(2)
+                with st.popover(
+                    'Resultado da Previsão', use_container_width=True
+                ):
+                    st.subheader('Modelo Utilizado')
+                    modelo_info = {
+                        'Forest': 'Random Forest - Modelo baseado em árvores de decisão que combina múltiplas árvores para melhor precisão',
+                        'KNN': 'K-Nearest Neighbors - Modelo que classifica baseado nos k exemplos mais próximos',
+                        'Logit': 'Regressão Logística - Modelo linear para classificação binária',
+                    }
+                    st.info(modelo_info[modelo_selecionado])
 
-            with col1:
-                st.metric(
-                    'Probabilidade de Ter Vítimas',
-                    f'{probabilidades[0][1]*100:.2f}%',
+                    st.subheader('Probabilidades')
+
+                    col1, col2 = st.columns(2)
+
+                    with col1:
+                        st.metric(
+                            'Probabilidade de Ter Vítimas',
+                            f'{probabilidades[0][1]*100:.2f}%',
+                        )
+
+                    with col2:
+                        st.metric(
+                            'Probabilidade de Não Ter Vítimas',
+                            f'{probabilidades[0][0]*100:.2f}%',
+                        )
+
+                    st.subheader('Interpretação')
+                    if probabilidades[0][1] > 0.7:
+                        st.error('Alto risco de acidente com vítimas')
+                    elif probabilidades[0][1] > 0.4:
+                        st.warning('Risco moderado de acidente com vítimas')
+                    else:
+                        st.success('Baixo risco de acidente com vítimas')
+
+                    st.subheader('Informações Adicionais')
+                    st.info(
+                        'Este simulador utiliza dados históricos para fazer previsões. Consulte sempre as autoridades de trânsito para informações oficiais.'
+                    )
+
+            except Exception as e:
+                st.error(f'Erro ao fazer previsão: {str(e)}')
+                st.info(
+                    'Verifique se todos os campos foram preenchidos corretamente.'
                 )
 
-            with col2:
-                st.metric(
-                    'Probabilidade de Não Ter Vítimas',
-                    f'{probabilidades[0][0]*100:.2f}%',
-                )
-
-            st.subheader('Interpretação')
-            if probabilidades[0][1] > 0.7:
-                st.error('Alto risco de acidente com vítimas')
-            elif probabilidades[0][1] > 0.4:
-                st.warning('Risco moderado de acidente com vítimas')
-            else:
-                st.success('Baixo risco de acidente com vítimas')
-
-            st.subheader('Informações Adicionais')
-            st.info(f"Modelo utilizado: {modelo['metodo']}")
-            st.info(
-                'Este simulador utiliza dados históricos para fazer previsões. Consulte sempre as autoridades de trânsito para informações oficiais.'
-            )
-
-    except Exception as e:
-        st.error(f'Erro ao fazer previsão: {str(e)}')
-        st.info('Verifique se todos os campos foram preenchidos corretamente.')
+            footer()

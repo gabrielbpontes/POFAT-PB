@@ -11,9 +11,7 @@ URL_LINKS = 'https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dado
 URL_DOWNLOAD = (
     'https://drive.usercontent.google.com/u/0/uc?id={}&export=download'
 )
-URL_DATASET = (
-    'data/acidentes_pb.csv'
-)
+URL_DATASET = 'data/acidentes_pb.csv'
 ANO_INICIO = 2020
 ANO_FIM = 2025
 
@@ -82,11 +80,13 @@ def concat_and_filter_dataset() -> pd.DataFrame:
 
     return dataset
 
+
 def remove_files():
     files = set(glob('data/*'))
     files = files - {URL_DATASET}
     for file in files:
         os.remove(file)
+
 
 def main():
     os.makedirs('data', exist_ok=True)

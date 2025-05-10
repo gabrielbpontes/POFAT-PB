@@ -1,6 +1,7 @@
 import logging
 
 import streamlit as st
+from utils import footer
 
 logger = logging.getLogger(__name__)
 
@@ -12,14 +13,14 @@ STYLES = {
             background: linear-gradient(180deg, #0E1117 0%, #1A1D24 100%);
             color: #FFFFFF;
         }
-        
+
         /* Container principal */
         .main-container {
             max-width: 700px;
             margin: 0 auto;
             padding: 1rem 1.5rem;
         }
-        
+
         /* Título */
         .title-container {
             text-align: center;
@@ -43,7 +44,7 @@ STYLES = {
             letter-spacing: 0.5px;
             margin-bottom: 0.5rem;
         }
-        
+
         /* Seções */
         .section {
             background: rgba(30, 30, 30, 0.3);
@@ -83,7 +84,7 @@ STYLES = {
             display: flex;
             align-items: center;
         }
-        
+
         /* Footer */
         .footer {
             margin-top: 2rem;
@@ -158,23 +159,38 @@ def exibir():
             'Os dados utilizados neste estudo foram obtidos por meio de um processo robusto de ETL, '
             'realizado a partir da base de dados abertos sobre acidentes de trânsito disponibilizada '
             'pela Polícia Rodoviária Federal (PRF). Para o desenvolvimento do modelo preditivo, foram '
-            'implementados e comparados algoritmos de aprendizado de máquina supervisionado, com destaque '
-            'para Regressão Logística e Árvores de Decisão, visando identificar a abordagem mais eficiente '
-            'para a previsão de feridos em acidentes de trânsito no estado da Paraíba.',
+            'implementados e comparados diferentes algoritmos de aprendizado de máquina supervisionado: '
+            'Regressão Logística, K-Nearest Neighbors (KNN) e Random Forest, visando identificar a '
+            'abordagem mais eficiente para a previsão de feridos em acidentes de trânsito no estado da Paraíba.',
         )
 
-        st.markdown(
-            """
-            <div class="footer">
-                <p>UFPB - <strong>Aprendizagem Supervisionada</strong></p>
-                <p>Professor: <strong>Alessio Tony</strong></p>
-                <p>Alunos: <strong>Gabriel Pontes</strong> e <strong>Nercino Neto</strong></p>
-            </div>
-        """,
-            unsafe_allow_html=True,
+        create_section(
+            'Modelos Disponíveis',
+            '<ul><li>Regressão Logística: Modelo estatístico que estima a probabilidade de ocorrência de feridos em acidentes de trânsito, '
+            'considerando variáveis como condições climáticas, tipo de via e horário do acidente. Ideal para identificar '
+            'fatores de risco mais significativos.</li>'
+            '<li>K-Nearest Neighbors (KNN): Algoritmo que classifica novos acidentes baseado em padrões similares já registrados, '
+            'considerando características como localização, tipo de colisão e condições da via. Excelente para capturar '
+            'relações não-lineares nos dados.</li>'
+            '<li>Random Forest: Ensemble de árvores de decisão que analisa múltiplos aspectos dos acidentes simultaneamente, '
+            'como condições meteorológicas, tipo de veículo e características da rodovia. Oferece alta precisão e '
+            'robustez na previsão de feridos.</li></ul>',
         )
 
-        st.markdown('</div>', unsafe_allow_html=True)
+        create_section(
+            'Informações Gerais',
+            '<ul>'
+            '<li>Turma: UFPB - Aprendizagem Supervisionada</li>'
+            '<li>Professor: <a href="https://www.linkedin.com/in/alessio-almeida-24b25282/" target="_blank" style="color: #FF5000; text-decoration: none;">Alessio Tony</a></li>'
+            '<li>Alunos: '
+            '<a href="https://www.linkedin.com/in/gabriel-pontes-2152a9276/" target="_blank" style="color: #FF5000; text-decoration: none;">Gabriel Pontes</a> e '
+            '<a href="https://www.linkedin.com/in/nercino-neto/" target="_blank" style="color: #FF5000; text-decoration: none;">Nercino Neto</a>'
+            '</li>'
+            '<li><a href="https://github.com/gabrielbpontes/POFAT-PB" target="_blank" style="color: #FF5000; text-decoration: none;">Repositório do Projeto</a></li>'
+            '</ul>',
+        )
+
+        footer()
 
     except Exception as e:
         logger.error(f'Erro ao exibir a página inicial: {str(e)}')

@@ -1,8 +1,8 @@
 from datetime import datetime
 
 import dashboard
-import home
 import simulator
+import sobre
 import streamlit as st
 
 st.set_page_config(
@@ -22,18 +22,18 @@ st.markdown(
     .stApp > div:first-child {
         display: none !important;
     }
-    
+
     /* Forçar tema escuro */
     .stApp {
         background: linear-gradient(180deg, #0E1117 0%, #1A1D24 100%) !important;
     }
-    
+
     /* Sidebar */
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #1A1D24 0%, #0E1117 100%) !important;
         padding: 1.5rem 1rem;
     }
-    
+
     /* Logo e título */
     .logo-container {
         text-align: center;
@@ -61,7 +61,7 @@ st.markdown(
         font-size: 0.9rem;
         letter-spacing: 0.2px;
     }
-    
+
     /* Botões de navegação */
     .nav-button {
         background: rgba(30, 30, 30, 0.3);
@@ -88,7 +88,7 @@ st.markdown(
         background: rgba(255, 80, 0, 0.15);
         border-color: #FF5000;
     }
-    
+
     /* Links úteis */
     .links-section {
         margin-top: 2rem;
@@ -124,7 +124,7 @@ st.markdown(
         margin-right: 0.5rem;
         color: #FF5000;
     }
-    
+
     /* Footer */
     .footer {
         margin-top: 2rem;
@@ -149,7 +149,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Sidebar
 with st.sidebar:
     st.markdown(
         """
@@ -161,29 +160,24 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
 
-    if st.button('Home', key='home_btn', use_container_width=True):
-        st.query_params['page'] = 'home'
+    if st.button('sobre', key='home_btn', use_container_width=True):
+        st.query_params['page'] = 'sobre'
     if st.button('Dashboard', key='dashboard_btn', use_container_width=True):
         st.query_params['page'] = 'dashboard'
     if st.button('Simulador', key='simulator_btn', use_container_width=True):
         st.query_params['page'] = 'simulator'
 
     current_year = datetime.now().year
+
     st.markdown(
-        f"""
-        <div class="footer">
-            <div class="version">v1.0.0</div>
-            <div class="copyright">© {current_year} - Todos os direitos reservados</div>
-        </div>
-    """,
+        '<div class="footer"><p class="version">Versão: 2.0.0</p></div>',
         unsafe_allow_html=True,
     )
 
+pagina = st.query_params.get('page', 'sobre')
 
-pagina = st.query_params.get('page', 'home')
-
-if pagina == 'home':
-    home.exibir()
+if pagina == 'sobre':
+    sobre.exibir()
 elif pagina == 'dashboard':
     dashboard.exibir()
 elif pagina == 'simulator':
