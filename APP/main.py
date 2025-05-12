@@ -160,7 +160,7 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
 
-    if st.button('sobre', key='home_btn', use_container_width=True):
+    if st.button('Sobre', key='home_btn', use_container_width=True):
         st.query_params['page'] = 'sobre'
     if st.button('Dashboard', key='dashboard_btn', use_container_width=True):
         st.query_params['page'] = 'dashboard'
