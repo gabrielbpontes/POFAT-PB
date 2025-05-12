@@ -1,4 +1,4 @@
-# 🚧 Previsão de Ocorrência de Feridos em Acidentes de Trânsito na Paraíba 
+# 🚧 Previsor de Ocorrência de Feridos em Acidentes de Trânsito na Paraíba - POFAT PB
 
 Este projeto tem como objetivo aplicar técnicas de aprendizado de máquina para prever a ocorrência de feridos em acidentes de trânsito no estado da Paraíba, utilizando dados históricos e variáveis como dia da semana, horário do acidente, condições meteorológicas e número de veículos e pessoas envolvidos.
 
